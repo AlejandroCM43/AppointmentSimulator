@@ -47,6 +47,26 @@ namespace AppointmentSimulator.ViewModels
                 return;
             }
 
+            foreach (var existing in Appointments)
+            {
+                if (existing.AppointmentDate == DateOnly.FromDateTime(AppointmentDate))
+                {
+                    bool overlap =
+                        StartingTime < existing.EndingTime &&
+                        EndingTime > existing.StartingTime;
+
+                    if (overlap)
+                    {
+                        await Application.Current.MainPage.DisplayAlert(
+                            "Error",
+                            $"La nueva cita se solapa con la cita de {existing.Name} ({existing.StartingTime:hh\\:mm}-{existing.EndingTime:hh\\:mm}).",
+                            "OK"
+                        );
+                        return;
+                    }
+                }
+            }
+
             Appointments.Add(new Appointment
             {
                 Name = Name,

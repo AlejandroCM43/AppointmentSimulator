@@ -8,7 +8,6 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
-        // Aquí registras la página de alta
         Routing.RegisterRoute(nameof(AddNewAppointmentPage), typeof(AddNewAppointmentPage));
     }
 }
