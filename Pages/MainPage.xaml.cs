@@ -1,14 +1,20 @@
-﻿using AppointmentSimulator.Models;
+﻿using AppointmentSimulator.ViewModels;
+using AppointmentSimulator.Views;
 
-namespace AppointmentSimulator.Pages
+namespace AppointmentSimulator.Pages;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    public MainPage()
     {
-        public MainPage()
-        {
-            InitializeComponent();
-            AppointmentsCollectionView.ItemsSource = GlobalData.Appointments;
-        }
+        InitializeComponent();
+        BindingContext = new AppointmentViewModel();
+    }
 
+    private async void OnAddClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(AddNewAppointmentPage));
     }
 }
+
+

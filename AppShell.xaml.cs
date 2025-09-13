@@ -1,10 +1,14 @@
-﻿namespace AppointmentSimulator
+﻿using AppointmentSimulator.Views;
+
+namespace AppointmentSimulator;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        // Aquí registras la página de alta
+        Routing.RegisterRoute(nameof(AddNewAppointmentPage), typeof(AddNewAppointmentPage));
     }
 }

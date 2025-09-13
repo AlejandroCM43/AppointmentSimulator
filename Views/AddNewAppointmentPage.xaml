@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AppointmentSimulator.ViewModels"
+             x:Class="AppointmentSimulator.Views.AddNewAppointmentPage"
+             Title="Nueva Cita">
+
+    <ContentPage.BindingContext>
+        <vm:AppointmentViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Nombre:" />
+            <Entry Text="{Binding Name}" Placeholder="Nombre del cliente" />
+
+            <Label Text="Asunto:" />
+            <Entry Text="{Binding Subject}" Placeholder="Asunto de la cita" />
+
+            <Label Text="Fecha:" />
+            <DatePicker Date="{Binding AppointmentDate}" />
+
+            <Label Text="Hora de inicio:" />
+            <TimePicker Time="{Binding StartingTime}" />
+
+            <Label Text="Hora de término:" />
+            <TimePicker Time="{Binding EndingTime}" />
+
+            <Button Text="Agregar cita"
+                    Command="{Binding AddAppointmentCommand}" />
+
+            <Button Text="Eliminar última cita"
+                    Command="{Binding DeleteAppointmentCommand}" />
+
+            <Label Text="Lista de citas:" FontAttributes="Bold" Margin="0,20,0,5"/>
+
+            <CollectionView ItemsSource="{Binding Appointments}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="LightGray"
+                                StrokeThickness="1"
+                                Padding="10"
+                                Margin="5"
+                                StrokeShape="RoundRectangle 8">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Subject}" />
+                                <Label Text="{Binding AppointmentDate, StringFormat='{0:dd/MM/yyyy}'}" />
+                                <Label Text="{Binding StartingTime}" />
+                                <Label Text="{Binding EndingTime}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
